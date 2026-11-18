@@ -2,22 +2,28 @@ name: Deploy TaskHub
 
 on:
   push:
-    branches: [ main ] # 监听 main 分支的推送
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout &#x1f6ce;&#xfe0f;
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install and Build &#x1f527;
+      # 新增：指定 Node 版本，解决线上打包环境问题
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install and Build
         run: |
           npm install
           npm run build
 
-      - name: Deploy &#x1f680;
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # 打包产物目录
-          branch: gh-pages # 部署到这个分支
+          folder: dist
+          branch: gh-pages
