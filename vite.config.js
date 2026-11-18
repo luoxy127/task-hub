@@ -14,6 +14,7 @@ export default defineConfig({
       ext: '.gz'
     })
   ],
+  base: '/task-hub/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
